@@ -1,0 +1,14 @@
+<div #external class="bookable-orders-container">
+  <div class="bookable-orders-header-container">
+    <h2>Bookable Orders</h2>
+  </div>
+  <div
+    *ngFor="let order of ordersService.bookableOrders$ | async"
+    class="event-container"
+  >
+    <span [id]="order.id" class="fc-event">{{
+      order.productCatalogue.title
+    }}</span
+    ><span>qty: {{ order.quantity - order.timesBooked }}</span>
+  </div>
+</div>

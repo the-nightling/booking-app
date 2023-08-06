@@ -1,0 +1,26 @@
+.bookable-orders-container {
+  width: 270px;
+  padding: 10px;
+  padding-bottom: 40px;
+  margin-top: 70px;
+  margin-right: 30px;
+  border: 1px solid var(--fc-button-bg-color);
+  border-radius: 13px;
+
+  .bookable-orders-header-container {
+    color: var(--fc-button-bg-color);
+  }
+
+  .event-container {
+    margin-bottom: 20px;
+
+    .fc-event {
+      background-color: var(--fc-event-border-color);
+      color: white;
+      border-radius: 10px;
+      padding: 5px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  }
+}

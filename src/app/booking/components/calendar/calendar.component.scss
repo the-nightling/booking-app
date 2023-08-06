@@ -1,0 +1,109 @@
+::ng-deep {
+  :root {
+    --fc-button-bg-color: #25486b;
+    --fc-border-color: darkgrey;
+  }
+
+  .fc-theme-standard {
+    .fc-scrollgrid {
+      border: none;
+    }
+
+    th {
+      border: 1px solid transparent;
+    }
+  }
+
+  .fc {
+    .fc-header-toolbar {
+      .fc-button {
+        border-radius: 13px;
+      }
+
+      .fc-toolbar-chunk > div {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .fc-toolbar-chunk:first-of-type {
+        border: 1px solid var(--fc-button-bg-color);
+        border-radius: 13px;
+
+        .fc-button-primary {
+          color: var(--fc-button-bg-color);
+          background-color: transparent;
+          border: none;
+
+          .fc-icon {
+            font-size: 2em;
+          }
+        }
+
+        .fc-button-primary:focus {
+          box-shadow: none;
+        }
+
+        h2.fc-toolbar-title {
+          padding-top: 8px;
+          font-size: 1.4em;
+          font-weight: 500;
+          color: var(--fc-button-bg-color);
+        }
+      }
+
+      .fc-toolbar-chunk:last-of-type {
+        font-size: 1.2em;
+
+        .fc-button {
+          text-transform: uppercase;
+        }
+      }
+    }
+
+    .fc-view {
+      table.fc-scrollgrid {
+        thead {
+          color: white;
+          background-color: var(--fc-button-bg-color);
+
+          tr.fc-scrollgrid-section-header {
+            th {
+              border-radius: 8px;
+            }
+
+            th.fc-col-header-cell {
+              font-family: Arial, Helvetica, sans-serif;
+              font-weight: normal;
+              text-transform: uppercase;
+              padding-top: 8px;
+              padding-bottom: 6px;
+            }
+          }
+        }
+
+        tbody {
+          tr.fc-scrollgrid-section > * {
+            border-right-width: 0px;
+            border-bottom-width: 0px;
+          }
+
+          .fc-event-time,
+          .fc-event-title {
+            padding: 0 1px;
+            white-space: normal;
+          }
+        }
+      }
+    }
+  }
+}
+
+.booking-container {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+
+  .calendar-container {
+    width: 100%;
+  }
+}

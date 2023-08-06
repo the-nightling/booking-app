@@ -1,0 +1,107 @@
+<div class="row">
+  <div class="column">
+    <button mat-icon-button class="close-button" [mat-dialog-close]="false">
+      <mat-icon class="close-icon" color="warn">close</mat-icon>
+    </button>
+  </div>
+  <div class="column">
+    <h2 mat-dialog-title>
+      {{
+        bookingOrder!.operation === BookingOperation.Edit
+          ? "Update/Delete"
+          : "Create"
+      }}
+      Booking
+    </h2>
+  </div>
+</div>
+<mat-dialog-content>
+  <form [formGroup]="bookingForm">
+    <mat-form-field [class.cdk-visually-hidden]="true" class="full-width">
+      <mat-label>Resource Id</mat-label>
+      <input matInput appFocus formControlName="resourceId" />
+    </mat-form-field>
+
+    <mat-form-field
+      [class.cdk-visually-hidden]="
+        bookingOrder.operation === BookingOperation.Edit
+      "
+      class="full-width"
+    >
+      <mat-label>Order</mat-label>
+      <mat-select
+        formControlName="orderId"
+        (selectionChange)="onOrderSelectionChange($event.value)"
+      >
+        <mat-option
+          *ngFor="let order of ordersService.bookableOrders$ | async"
+          [value]="order.id"
+        >
+          {{ order.productCatalogue.title }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+
+    <div class="container p-0">
+      <div class="row">
+        <mat-form-field class="col">
+          <mat-label>Date</mat-label>
+          <input matInput formControlName="date" type="date" />
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>Start Time</mat-label>
+          <input matInput formControlName="startTime" type="time" />
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>End Time</mat-label>
+          <input matInput formControlName="endTime" type="time" />
+        </mat-form-field>
+      </div>
+      <ng-container *ngIf="bookingForm.errors?.['startTimeAfterEndTime']">
+        <div class="row">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-8 cross-validation-error-message">
+            The booking end time cannot be less than the start time
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="bookingForm.errors?.['invalidDuration']">
+        <div class="row">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-8 cross-validation-error-message">
+            The booking end time is inconsistent with the event duration
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <mat-form-field class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea formControlName="description" matInput></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <ng-container *ngIf="bookingOrder?.operation === BookingOperation.Edit">
+    <button mat-button (click)="delete()">Delete</button>
+  </ng-container>
+
+  <button
+    mat-button
+    [disabled]="
+      !bookingForm.valid ||
+      (bookingOrder!.operation === BookingOperation.Edit && !valuesChanged)
+    "
+    (click)="upsert()"
+  >
+    {{
+      bookingOrder!.operation === BookingOperation.Edit ? "Update" : "Create"
+    }}
+  </button>
+</mat-dialog-actions>
