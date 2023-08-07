@@ -370,3 +370,6 @@ dist/
 # Angular
 .angular/
 environment.development.ts
+
+# Jetbrains WebStorm
+.idea/

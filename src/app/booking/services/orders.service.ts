@@ -95,7 +95,7 @@ export class OrdersService {
     return this.httpClient.post<Booking>(
       `${environment.apiUrl}/orders/bookings`,
       {
-        resourceId: orderId,
+        orderId: orderId,
         description: productDescription,
         start: startDate.toISOString(),
         end: endDate.toISOString()
@@ -114,7 +114,7 @@ export class OrdersService {
       `${environment.apiUrl}/orders/bookings`,
       {
         id: bookingId,
-        resourceId: orderId,
+        orderId: orderId,
         description: productDescription,
         start: startDate.toISOString(),
         end: endDate.toISOString()
